@@ -1,0 +1,41 @@
+body {
+    background-color: antiquewhite;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 50px;
+    /* height: 0px; */
+    border-radius: 5px;
+    background-color: white;
+}
+
+.heading {
+    text-align: center;
+}
+
+.button {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: white;
+    background-color: rgb(18, 122, 87);
+}
+
+.toggleButton {
+    background-color: transparent;
+    border: none;
+    color: blue;
+    margin-top: 5px
+}
