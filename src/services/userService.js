@@ -1,18 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { users } = require("../config/database");
 const { v4: uuidv4 } = require("uuid");
-const bcrypt = require("bcrypt");
 
-const saltRounds = 10;
-
-exports.register = async (username, email, password) => {
+exports.register = (username, email, password) => {
   try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
     let newUser = {
       id: uuidv4(),
       username,
       email,
-      password: hashedPassword,
+      password,
       participatedProjects: [],
       ownedProjects: [],
     };

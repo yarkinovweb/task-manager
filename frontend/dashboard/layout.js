@@ -34,9 +34,11 @@ window.navClicked = function (clicked) {
     p.textContent = "this is p in dashboard";
     main.appendChild(p);
   } else if (clicked.childNodes[3].textContent == "Projects") {
-    const p = document.createElement("p");
-    p.textContent = "this is p in Projects";
-    main.appendChild(p);
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = projectContainer;
+    const projectElement = tempDiv.firstElementChild;
+
+    main.appendChild(projectElement);
   } else if (clicked.childNodes[3].textContent == "Tasks") {
     const p = document.createElement("p");
     p.textContent = "this is p in Tasks";
@@ -55,7 +57,7 @@ window.navClicked = function (clicked) {
   }
 };
 
-export function createThead() {
+function createThead() {
   thead.innerHTML = "";
   const tr = document.createElement("tr");
   tr.style.border = "1px solid black";
@@ -71,9 +73,9 @@ export function createThead() {
   table.appendChild(thead);
 }
 
-const labels = ["Username", "Email", "Password"];
+const labels = ["Username", "Email"];
 
-export const table = document.createElement("table");
+const table = document.createElement("table");
 table.style.border = "1px solid black";
 table.style.borderCollapse = "collapse";
 
@@ -100,8 +102,27 @@ function createTbody(users) {
     renderRow({
       username: user.username,
       email: user.email,
-      password: user.password,
+      // ownedProjects: user.ownedProjects[0].title ,
+      // participatedProjects: user.participatedProjects || "",
     });
   });
   table.appendChild(tbody);
 }
+
+// project container - keginchalik project.js ga otkazish kerak
+const projectContainer = `<div class="project-card">
+        <div class="project-title">Project Planning</div>
+        <div class="project-info">
+            <div class="project-members">
+                Members: <span>John Doe, Jane Smith</span>
+            </div>
+            <div class="project-deadline">
+                Deadline: <span>2025-05-15</span>
+            </div>
+        </div>
+        <div class="project-actions">
+            <button class="btn-add-user" onclick="addUser(1)">Add User</button>
+            <button class="btn-edit" onclick="editproject(1)">Edit</button>
+            <button class="btn-delete" onclick="deleteproject(1)">Delete</button>
+        </div>
+    </div>`;
