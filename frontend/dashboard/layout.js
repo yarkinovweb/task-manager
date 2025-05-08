@@ -6,6 +6,39 @@ if (!token) {
 
 const username = document.querySelector(".user-name");
 const email = document.querySelector(".user-email");
+let owned = document.querySelector(".ownedProjects")
+let participated = document.querySelector(".participatedProjects")
+
+const mainWrapper = document.createElement("div");
+mainWrapper.classList.add("mainWrapper");
+
+const projectContainer = `<div class="project-card">
+        <div class="project-title">${owned[0].title}</div>
+        <div class="project-info">
+            <div class="project-members">
+                Members: <span></span>
+            </div>
+            <div class="project-deadline">
+                Deadline: <span>2025-05-15</span>
+            </div>
+        </div>
+        <div class="project-actions">
+            <button class="btn-add-user" onclick="addUser(1)">Add User</button>
+            <button class="btn-edit" onclick="editproject(1)">Edit</button>
+            <button class="btn-delete" onclick="deleteproject(1)">Delete</button>
+        </div>
+    </div>`;
+
+const tempDiv = document.createElement("div");
+tempDiv.innerHTML = projectContainer;
+const projectElement = tempDiv.firstElementChild;
+// //////
+const ownedProjects = document.createElement("div");
+ownedProjects.classList.add("ownedProjects");
+ownedProjects.appendChild(projectElement);
+// ///////////
+const participatedProjects = document.createElement("div");
+participatedProjects.classList.add("participatedProjects");
 
 function getUserInfo() {
   const userId = localStorage.getItem("id");
@@ -20,6 +53,10 @@ function getUserInfo() {
     .then((data) => {
       username.textContent = data.username;
       email.textContent = data.email;
+      owned = data.ownedProjects
+      participated = data.participatedProjects
+      console.log(owned);
+      console.log(participated);
     });
 }
 getUserInfo();
@@ -34,11 +71,10 @@ window.navClicked = function (clicked) {
     p.textContent = "this is p in dashboard";
     main.appendChild(p);
   } else if (clicked.childNodes[3].textContent == "Projects") {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = projectContainer;
-    const projectElement = tempDiv.firstElementChild;
-
-    main.appendChild(projectElement);
+    main.appendChild(mainWrapper);
+    // ///////
+    mainWrapper.appendChild(ownedProjects);
+    mainWrapper.appendChild(participatedProjects);
   } else if (clicked.childNodes[3].textContent == "Tasks") {
     const p = document.createElement("p");
     p.textContent = "this is p in Tasks";
@@ -110,19 +146,9 @@ function createTbody(users) {
 }
 
 // project container - keginchalik project.js ga otkazish kerak
-const projectContainer = `<div class="project-card">
-        <div class="project-title">Project Planning</div>
-        <div class="project-info">
-            <div class="project-members">
-                Members: <span>John Doe, Jane Smith</span>
-            </div>
-            <div class="project-deadline">
-                Deadline: <span>2025-05-15</span>
-            </div>
-        </div>
-        <div class="project-actions">
-            <button class="btn-add-user" onclick="addUser(1)">Add User</button>
-            <button class="btn-edit" onclick="editproject(1)">Edit</button>
-            <button class="btn-delete" onclick="deleteproject(1)">Delete</button>
-        </div>
-    </div>`;
+
+
+// projectWrapper2.appendChild(projectElement);
+
+// ///////
+
