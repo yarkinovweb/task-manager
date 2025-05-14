@@ -553,49 +553,40 @@ th {
 .project-card {
     background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 16px;
     width: 300px;
     height: auto;
     transition: transform 0.2s;
 }
 
-.mainWrapper{
+.mainWrapper {
     width: 100%;
     height: auto;
     display: flex;
     padding: 20px;
-    background: red;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
+    /* gap: 20px; */
+}
+
+.ownedProjects {
+    background: #ffffff;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
     gap: 20px;
 }
 
-.ownedProjects{
+.participatedProjects {
     background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 50%;
     height: auto;
     padding: 16px;
-    transition: transform 0.2s;
 }
 
-.participatedProjects{
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    height: auto;
-    padding: 16px;
-    transition: transform 0.2s;
-}
 
-.project-card:hover {
-    transform: translateY(-4px);
-}
-
-/* project Title */
 .project-title {
     font-size: 18px;
     font-weight: 600;
@@ -603,7 +594,6 @@ th {
     color: #333;
 }
 
-/* project Info */
 .project-info {
     display: flex;
     flex-direction: column;

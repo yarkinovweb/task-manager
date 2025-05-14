@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .main-wrapper {
+        max-width: 1200px;
+        margin: auto;
+        padding: 2rem;
+        background-color: #f8f9fa;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      .projects-container {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .projects-section {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .projects-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #0d6efd;
+        padding-left: 1rem;
+        color: #343a40;
+      }
+
+      .projects-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        background-color: #ffffff;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .project-card h3 {
+        margin: 0 0 0.5rem;
+        color: #0d6efd;
+      }
+
+      .project-card p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <div class="projects-container">
+        <!-- Owned Projects -->
+        <div class="projects-section">
+          <h2>Owned Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <h3>Project A</h3>
+              <p>Description of owned project A.</p>
+            </div>
+            <div class="project-card">
+              <h3>Project B</h3>
+              <p>Description of owned project B.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participated Projects -->
+        <div class="projects-section">
+          <h2>Participated Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card">
+              <h3>Project X</h3>
+              <p>Description of participated project X.</p>
+            </div>
+            <div class="project-card">
+              <h3>Project Y</h3>
+              <p>Description of participated project Y.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -6,43 +6,23 @@ if (!token) {
 
 const username = document.querySelector(".user-name");
 const email = document.querySelector(".user-email");
-let owned = document.querySelector(".ownedProjects")
-let participated = document.querySelector(".participatedProjects")
 
 const mainWrapper = document.createElement("div");
 mainWrapper.classList.add("mainWrapper");
 
-const projectContainer = `<div class="project-card">
-        <div class="project-title">${owned[0].title}</div>
-        <div class="project-info">
-            <div class="project-members">
-                Members: <span></span>
-            </div>
-            <div class="project-deadline">
-                Deadline: <span>2025-05-15</span>
-            </div>
-        </div>
-        <div class="project-actions">
-            <button class="btn-add-user" onclick="addUser(1)">Add User</button>
-            <button class="btn-edit" onclick="editproject(1)">Edit</button>
-            <button class="btn-delete" onclick="deleteproject(1)">Delete</button>
-        </div>
-    </div>`;
-
-const tempDiv = document.createElement("div");
-tempDiv.innerHTML = projectContainer;
-const projectElement = tempDiv.firstElementChild;
-// //////
 const ownedProjects = document.createElement("div");
+ownedProjects.textContent = "Owned Projects";
 ownedProjects.classList.add("ownedProjects");
-ownedProjects.appendChild(projectElement);
-// ///////////
+
 const participatedProjects = document.createElement("div");
+participatedProjects.textContent = "Participated Projects";
 participatedProjects.classList.add("participatedProjects");
+
+let userOwnedProjects = [];
+let userParticipatedProjects = [];
 
 function getUserInfo() {
   const userId = localStorage.getItem("id");
-
   fetch(`http://localhost:3000/auth/users/${userId}`, {
     method: "GET",
     headers: {
@@ -53,10 +33,8 @@ function getUserInfo() {
     .then((data) => {
       username.textContent = data.username;
       email.textContent = data.email;
-      owned = data.ownedProjects
-      participated = data.participatedProjects
-      console.log(owned);
-      console.log(participated);
+      userOwnedProjects = data.ownedProjects;
+      userParticipatedProjects = data.participatedProjects;
     });
 }
 getUserInfo();
@@ -65,16 +43,47 @@ const main = document.querySelector(".task-board");
 
 window.navClicked = function (clicked) {
   main.innerHTML = "";
-
   if (clicked.childNodes[3].textContent == "Dashboard") {
     const p = document.createElement("p");
     p.textContent = "this is p in dashboard";
     main.appendChild(p);
   } else if (clicked.childNodes[3].textContent == "Projects") {
-    main.appendChild(mainWrapper);
-    // ///////
+    mainWrapper.innerHTML = "";
+    ownedProjects.innerHTML = "";
+    participatedProjects.innerHTML = "";
+    ownedProjects.textContent = "Owned Projects";
+    participatedProjects.textContent = "Participated Projects";
+    userOwnedProjects.forEach((project) => {
+      const projectContainer = `<div class="project-card">
+        <div class="project-title">${project.title}</div>
+        <p>${project.description}</p>
+        <div class="project-info">
+            <div class="project-members">
+                Members: <span>${project.members}</span>
+            </div>
+            <div class="project-deadline">
+                Deadline: <span>${project.deadline}</span>
+            </div>
+        </div>
+        <div class="project-actions">
+            <button class="btn-add-user" onclick="addUser(1)">Add User</button>
+            <button class="btn-edit" onclick="editproject(1)">Edit</button>
+            <button class="btn-delete">Delete</button>
+        </div>
+    </div>`;
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = projectContainer;
+      const projectElement = tempDiv.firstElementChild;
+      ownedProjects.appendChild(projectElement);
+      const delButton = document.querySelector('.btn-delete')
+      console.log(delButton);
+      
+      // delButton.addEventListener('click', () => deleteproject(project.id));
+    });
     mainWrapper.appendChild(ownedProjects);
     mainWrapper.appendChild(participatedProjects);
+    main.appendChild(mainWrapper);
+    
   } else if (clicked.childNodes[3].textContent == "Tasks") {
     const p = document.createElement("p");
     p.textContent = "this is p in Tasks";
@@ -92,6 +101,17 @@ window.navClicked = function (clicked) {
       .then((data) => createTbody(data));
   }
 };
+
+function deleteproject(projectId) {
+  fetch(`http://localhost:3000/project/${projectId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+}
 
 function createThead() {
   thead.innerHTML = "";
@@ -144,11 +164,3 @@ function createTbody(users) {
   });
   table.appendChild(tbody);
 }
-
-// project container - keginchalik project.js ga otkazish kerak
-
-
-// projectWrapper2.appendChild(projectElement);
-
-// ///////
-
